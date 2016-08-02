@@ -26,15 +26,27 @@ public class Battery {
 	}
 	
 	public void discharge(float usedEnergy){
-		if (leftOver - usedEnergy > 0) leftOver -= usedEnergy;
 		
-		else leftOver = 0;
+		if (usedEnergy < 0) System.out.println("User error: cannot discharge a negative amount");
+		
+		else{
+			
+			if (leftOver - usedEnergy > 0) leftOver -= usedEnergy;
+		
+			else leftOver = 0;
+		}
 	}
 	
 	public void charge(float newEnergy){
-		if (leftOver + newEnergy < capacity) leftOver += newEnergy;
 		
-		else leftOver = capacity;
+		if (newEnergy < 0 ) System.out.println("User error: cannot charge a negative amount");
+		
+		else{
+			
+			if (leftOver + newEnergy < capacity) leftOver += newEnergy;
+		
+			else leftOver = capacity;
+		}
 	}
 	
 	public void turnOn() throws InterruptedException{

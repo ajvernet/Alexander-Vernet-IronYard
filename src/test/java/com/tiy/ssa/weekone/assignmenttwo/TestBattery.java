@@ -75,7 +75,7 @@ public class TestBattery {
 		testBat1.turnOff();
 		
 		System.out.println(testBat1.getEnergy());
-		assertTrue(testBat1.getEnergy() == 96f);
+		assertTrue(testBat1.getEnergy() == 97f);
 	}
 	
 	@Test
