@@ -40,7 +40,7 @@ public class PowerTest {
 	public void loopingPowerTest(){
 		for(int i = 1; i < 10; i++){
 			Random r = new Random();
-			Integer randInt = r.nextInt();
+			Integer randInt = r.nextInt(10);
 			
 			assertEquals((int) Math.pow(randInt, i), new Power(randInt).powerOf(i), .01);
 		}
