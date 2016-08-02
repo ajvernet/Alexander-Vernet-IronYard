@@ -34,6 +34,22 @@ public class TestBattery {
 	}
 	
 	@Test
+	public void testNegCharge(){
+		
+		Battery testBat1 = new Battery(25f);
+		testBat1.charge(-30);
+		System.out.println(testBat1.leftOver);
+		assertTrue(testBat1.leftOver > -1);
+	}
+	
+	@Test
+	public void testNegativeBattery(){
+		
+		Battery testBat1 = new Battery(-200);	
+		assertFalse(testBat1.capacity > 0);
+	}
+	
+	@Test
 	public void testChargeBatteryPastRange(){
 		
 		Battery testBat1 = new Battery(100f);
