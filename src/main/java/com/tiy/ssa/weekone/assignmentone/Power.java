@@ -9,6 +9,7 @@ public class Power {
 	}
 	
 	public int powerOf(int exponent){
+	
 		if (exponent == 1) return this.numValue;
 		
 		else return this.numValue * powerOf(exponent - 1);

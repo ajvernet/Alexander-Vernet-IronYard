@@ -5,6 +5,8 @@ package com.tiy.ssa.weekone.assignmentone;
 
 import static org.junit.Assert.*;
 
+import java.util.Random;
+
 import org.junit.Test;
 
 public class PowerTest {
@@ -29,8 +31,20 @@ public class PowerTest {
 		assertEquals(625, new Power(5).powerOf(4));
 	}
 
-	private void testPowerOfFive() {
+	@Test
+	public void testPowerOfFive() {
 		assertEquals(3125, new Power(5).powerOf(5));
-
 	}
-}
+	
+	@Test
+	public void loopingPowerTest(){
+		for(int i = 1; i < 10; i++){
+			Random r = new Random();
+			Integer randInt = r.nextInt();
+			
+			assertEquals((int) Math.pow(randInt, i), new Power(randInt).powerOf(i), .01);
+		}
+	}
+
+}	
+
