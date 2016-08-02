@@ -39,17 +39,13 @@ public class Battery {
 	
 	public void turnOn() throws InterruptedException{
 		on = true;
-		onTime = System.currentTimeMillis();
-		System.out.println(onTime);
-		
-		
+		onTime = System.currentTimeMillis();		
 	}
 	
 	public void turnOff() {
 		on = false;
 		offTime = System.currentTimeMillis();
 		discharge((offTime - onTime) / 1000 * lossRate);
-		System.out.println(offTime);
 	}
 	
 	public float getEnergy(){
