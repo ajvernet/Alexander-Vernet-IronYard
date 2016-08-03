@@ -14,9 +14,9 @@ public class TestPalindrome {
 	}
 	
 	@Test
-	public void testIsPalindrome() {
+	public void testIsPalindrome(){	
 		
-		assertTrue(new MaybePalindrome("mom").isPalindrome());
+		assertTrue(new MaybePalindrome("mom").isPalindrome());	
 		
 	}
 	

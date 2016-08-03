@@ -48,7 +48,7 @@ public class TestBattery {
 		Battery testBat1 = new Battery(-200);	
 		assertFalse(testBat1.capacity > 0);
 	}
-	
+		
 	@Test
 	public void testChargeBatteryPastRange(){
 		
