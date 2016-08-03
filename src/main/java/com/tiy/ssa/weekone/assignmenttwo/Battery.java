@@ -60,6 +60,10 @@ public class Battery {
 		discharge((offTime - onTime) / 1000 * lossRate);
 	}
 	
+	public float getCapacity(){
+		return this.capacity;
+	}
+	
 	public float getEnergy(){
 		return this.leftOver;
 	}
