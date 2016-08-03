@@ -64,7 +64,7 @@ public class Battery {
 		return this.leftOver;
 	}
 	
-	public float howLong(){
-		return leftOver / lossRate;
+	public int howLong(float power){
+		return (int) (leftOver / power);
 	}
 }

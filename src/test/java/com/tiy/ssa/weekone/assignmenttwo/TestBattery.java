@@ -85,6 +85,6 @@ public class TestBattery {
 		
 		testBat1.discharge(10);
 		
-		assertTrue(testBat1.howLong() == 18f);
+		assertTrue(testBat1.howLong(5) == 18);
 	}
 }
