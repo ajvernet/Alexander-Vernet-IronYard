@@ -4,8 +4,7 @@ import java.util.Random;
 
 public class LazyKnight {
 
-	private int xPosition;
-	private int yPosition;
+	Position position, home;
 	
 	private int moveCount = 0;
 	
@@ -13,11 +12,11 @@ public class LazyKnight {
 	private int lastMoveY;
 		
 	public LazyKnight(int xPosition, int yPosition){
-		this.xPosition = xPosition;
-		this.yPosition = yPosition;
+		home = new Position(xPosition, yPosition);
+		position = home.clone();
 	}
 	
-	public void move(){
+	public Position move(){
 		
 		int xMove = 0, yMove = 0;
 		
@@ -29,45 +28,35 @@ public class LazyKnight {
 			Random r = new Random();
 			xMove = legalMoves[r.nextInt(4)];
 			yMove = legalMoves[r.nextInt(4)];
-			setLastMove(xMove, yMove);
-			movePosition(xMove, yMove);
 			break;
 			
 		case(1):
-	
 			xMove = -lastMoveX;
 			yMove = lastMoveY;	
-			setLastMove(xMove, yMove);
-			movePosition(xMove, yMove);
 			break;
 			
 		case(2):
-			
 			xMove = lastMoveX;
 			yMove = -lastMoveY;
-			setLastMove(xMove, yMove);
-			movePosition(xMove, yMove);
 			break;
 			
-		case(3):
-			
+		case(3):			
 			xMove = -lastMoveX;
 			yMove = lastMoveY;
-			setLastMove(xMove, yMove);
-			movePosition(xMove, yMove);
-			break;
-		
+			break;		
 		}
-
-
-
 		
+		setLastMove(xMove, yMove);
+		movePosition(xMove, yMove);
 		moveCount++;
+		
+		if (position.equals(home)) moveCount = 0;
+		
+		return position;
 	}
 	
 	private void movePosition(int x, int y){
-		xPosition += x;
-		yPosition += y;
+		position = position.move(x, y);
 	}
 	
 	private void setLastMove(int x, int y){
@@ -75,15 +64,13 @@ public class LazyKnight {
 		lastMoveY = y;
 	}
 	
-	public int getXPosition(){
-		return xPosition;
+	public Position getPosition(){
+		return position;
 	}
 	
-	public int getYPosition(){
-		return yPosition;
-	}
-	public String getPosition(){
-		return "x position: " + xPosition + " y position: " + yPosition;
+	@Override
+	public String toString(){
+		return position.toString(); 
 	}
 
 
