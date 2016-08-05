@@ -13,7 +13,7 @@ public class LazyKnight {
 		
 	public LazyKnight(int xPosition, int yPosition){
 		home = new Position(xPosition, yPosition);
-		position = home.clone();
+		position = home;
 	}
 	
 	public Position move(){

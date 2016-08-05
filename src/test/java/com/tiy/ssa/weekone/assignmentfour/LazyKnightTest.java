@@ -30,21 +30,19 @@ public class LazyKnightTest {
 	}
 	
 	@Test
-	
 	public void notRetraced(){
 		
 		Position lastPosition;
 		LazyKnight sirThurston = new LazyKnight(1, 10);
 		
-		for(int i = 0; i < 10; i++){
-			
-			lastPosition = sirThurston.getPosition().clone();
-			
+		for(int i = 0; i < 10; i++){	
+			lastPosition = sirThurston.getPosition();		
 			sirThurston.move();
-			
-			assertFalse(sirThurston.move().equals(lastPosition));
 			System.out.println(sirThurston.toString());
+			assertFalse(sirThurston.move().equals(lastPosition));
 			
 		}
 	}
+	
+	
 }

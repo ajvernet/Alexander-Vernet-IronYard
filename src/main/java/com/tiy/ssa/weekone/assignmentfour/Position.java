@@ -22,10 +22,6 @@ public class Position {
 		return new Position(this.x + x, this.y + y);
 	}
 	
-	public Position clone(){
-		return new Position(this.x, this.y);
-	}
-	
 	public int getX(){
 		return x;
 	}
