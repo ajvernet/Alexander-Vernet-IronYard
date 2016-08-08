@@ -69,6 +69,6 @@ public class Battery {
 	}
 	
 	public int howLong(float power){
-		return (int) (leftOver / power);
+		return (int) (leftOver / power) * 60;
 	}
 }
