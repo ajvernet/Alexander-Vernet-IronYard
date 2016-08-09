@@ -17,9 +17,8 @@ public class Lists {
                 setC.add(t);
         }
         
-        List<T> listC = new ArrayList<>();
-        listC.addAll(setC);
-        
+        List<T> listC = new ArrayList<>(setC);
+
         return listC;
     }
     
