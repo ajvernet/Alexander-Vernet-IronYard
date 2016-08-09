@@ -31,6 +31,8 @@ public class TestList {
         listB.add("picked");
         listB.add("a");
         listB.add("peck");
+        listB.add("Peter");
+        listB.add("peck");
     }
     
     @After
@@ -51,12 +53,12 @@ public class TestList {
     
     @Test
     public void testSortByDescending(){
-        Lists.descendingBySize(listA);
-        System.out.println(listA.toString());
+        listB = Lists.descendingBySize(listA);
+        System.out.println(listB.toString());
         
-        for(int i = 1; i < listA.size(); i++){
+        for(int i = 1; i < listB.size(); i++){
             
-            assertTrue(listA.get(i).length() <= listA.get(i - 1).length());
+            assertTrue(listB.get(i).length() <= listB.get(i - 1).length());
         }
     }
 
