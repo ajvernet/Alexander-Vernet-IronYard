@@ -7,24 +7,21 @@ import java.util.Set;
 
 public class Lists {
 
-    
-    public static <T> List<T> match(List<T> listA, List<T> listB)
-    {
+    public static <T> List<T> match(List<T> listA, List<T> listB) {
         Set<T> setC = new HashSet<>();
-        
-        for(T t: listA){
+
+        for (T t : listA) {
             if (listB.contains(t))
                 setC.add(t);
         }
-        
+
         return new ArrayList<>(setC);
     }
-    
 
-    public static List<String> descendingBySize(List<String> input){
-       List<String> newList = new ArrayList<>(input);
-       
-       newList.sort((String s1, String s2) -> s2.length() - s1.length());
-       return newList;
+    public static List<String> descendingBySize(List<String> input) {
+        List<String> newList = new ArrayList<>(input);
+
+        newList.sort((String s1, String s2) -> s2.length() - s1.length());
+        return newList;
     }
 }
