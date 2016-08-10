@@ -14,8 +14,10 @@ public class User {
         this.age = age;
     }
     
-    public User()
-    {}
+    public User(String firstName, String lastName)
+    {
+        this(firstName, lastName, 10);
+    }
 
     public String getFirstName() {
         return firstName;
