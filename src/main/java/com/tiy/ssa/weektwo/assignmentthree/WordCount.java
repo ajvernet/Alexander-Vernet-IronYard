@@ -25,6 +25,7 @@ public class WordCount {
 
     public int count(String word)
     {
+        
         return wordMap.get(word);
     }
 
@@ -35,6 +36,7 @@ public class WordCount {
         List<Integer> countList = new ArrayList<>(wordMap.values());
         countList.sort(Collections.reverseOrder());
       
+        
         
         List<String> wordList = new ArrayList<>();
 
