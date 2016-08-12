@@ -8,11 +8,11 @@ public class FactorialTest {
 
     @Test
     public void testFactorial() {
-        System.out.println(Factorial.factorial(10));
+        System.out.println(Factorial.factorial(100));
         System.out.println(Factorial.callCount);
         
         Factorial.callCount = 0;
-        System.out.println(Factorial.factorial(10));
+        System.out.println(Factorial.factorial(100));
         System.out.println(Factorial.callCount);     
     }
     

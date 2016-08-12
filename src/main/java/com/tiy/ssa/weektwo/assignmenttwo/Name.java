@@ -48,6 +48,12 @@ public class Name {
             return false;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "" + first + "" + last;
+    }
+    
     
     
 }
