@@ -1,22 +1,18 @@
 package com.tiy.ssa.weekthreeShape;
 
-public class Rectangle {
+import java.util.Comparator;
+
+public class Rectangle implements Shape{
 
     int height, width;
     
-
-
     public Rectangle(int height, int width) {
         super();
         this.height = height;
         this.width = width;
     }
     
-    public float area()
-    {
-        return getHeight() * getWidth();
-    }
-    
+
     public int getWidth()
     {
         return this.width;
@@ -34,8 +30,37 @@ public class Rectangle {
 
     public void setWidth(int width) 
     {
+        int i = 1;
+        new Comparator<Object>()
+        {
+            (Object o1,Object o2) -> (i + 5);
+        };
         this.width = width;
     }
+
+
+
+
+    @Override
+    public float getArea() {
+        return getHeight() * getWidth();
+    }
+
+
+    @Override
+    public void draw() {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+
+
+
+
+
+
+    
     
     
     

@@ -1,9 +1,12 @@
 package com.tiy.ssa.week3;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class TestSSAMap {
 
@@ -30,6 +33,10 @@ public class TestSSAMap {
     
     @Test
     public void testContainsValue() {
+
+        System.out.println(testDecMap.entrySet());
+        System.out.println(testDecMap.get(10));
+        
         System.out.println(testDecMap.values());
         assertTrue(testDecMap.containsValue("First"));
     }

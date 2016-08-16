@@ -4,7 +4,7 @@ public interface Shape {
 
     public String word = "word";
     
-    public int getArea();
+    public float getArea();
     
     public void draw();
 }
