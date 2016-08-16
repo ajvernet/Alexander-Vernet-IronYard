@@ -34,6 +34,7 @@ public class Registry {
 
     public Person progenitor(SocialSecurityNumber ssn) {
 
+       
         List<Person> progenitors = progenitorList(ssn);
         progenitors.sort((Person p1, Person p2) -> p2.age() - p1.age());
         return progenitors.get(0);

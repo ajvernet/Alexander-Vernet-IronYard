@@ -10,16 +10,17 @@ import java.util.Map;
 
 public class WordCount {
     
-    private ArrayList<String> source = new ArrayList<>();
+    private final ArrayList<String> source = new ArrayList<>();
     
-    private Map<String, Integer> wordMap = new HashMap<>();
+    private final Map<String, Integer> wordMap = new HashMap<>();
+    
     
     public void addWord(String word)
     {
         source.add(word + " ");
         if (wordMap.containsKey(word.toLowerCase()))
         wordMap.put(word.toLowerCase(), wordMap.get(word.toLowerCase()) + 1);
-        
+     
         else wordMap.put(word.toLowerCase(), 1);
     }
 
@@ -39,11 +40,13 @@ public class WordCount {
         
         
         List<String> wordList = new ArrayList<>();
+        
+        
 
         for(Integer i: countList){
             for(Map.Entry<String, Integer> e: wordMap.entrySet()){
                 if(e.getValue().equals(i) && !(wordList.contains(e.getKey()))) wordList.add(e.getKey());       
-           
+    
             }
         } 
         
@@ -51,7 +54,10 @@ public class WordCount {
         
     }
 
-
+    public V getOrDefault(K key, V def){
+        
+        
+    }
     public List<String> bottom(int many)
     {
         List<Integer> countList = new ArrayList<>(wordMap.values());     
