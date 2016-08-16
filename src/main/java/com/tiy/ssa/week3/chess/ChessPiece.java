@@ -38,12 +38,12 @@ public class ChessPiece implements Piece{
             return (location.isDistanceXY(where, 1, 2) || location.isDistanceXY(where,  2, 1)) ? true : false;
             
         case PAWN:
-            if(location.getY() == 1) return (location.isVertical(where) && 
+            if(location.getY() == 1) return (location.isPositiveY(where) && location.isVertical(where) && 
                     (location.isDistance(where, 1) || location.isDistance(where,  2))) ? true : false;
-            return (location.isVertical(where) && location.isDistance(where, 1)) ? true : false;
+            return (location.isPositiveY(where) && location.isVertical(where) && location.isDistance(where, 1)) ? true : false;
             
         case ROOK:
-            return (location.isHorizontal(where));
+            return (location.isHorizontal(where) || location.isVertical(where));
             
         default:
             break;    

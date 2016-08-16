@@ -12,9 +12,10 @@ public class Location {
         this.x = x;
         this.y = y;
     }
-
-    public boolean equals(Location other) {
-        if (x == other.x && y == other.y)
+    
+    @Override
+    public boolean equals(Object other) {
+        if (x == ((Location)other).x && y == ((Location)other).y)
             return true;
 
         return false;
@@ -30,7 +31,11 @@ public class Location {
     }
     
     public Boolean isVertical(Location next){
-        return (Math.abs(next.y - this.y) == 0) ? true: false;
+        return (Math.abs(next.x - this.x) == 0) ? true: false;
+    }
+    
+    public Boolean isPositiveY(Location next){
+        return (next.y - this.y > 0) ? true : false;
     }
     
     public Boolean isDiagonal(Location next){
@@ -43,8 +48,8 @@ public class Location {
     }
     
     public Boolean isDistanceXY(Location next, int distanceX, int distanceY){
-        return(Math.abs(next.x - this.x) <= distanceX && 
-                Math.abs(next.y - this.y) <= distanceY) ? true: false;
+        return(Math.abs(next.x - this.x) == distanceX && 
+                Math.abs(next.y - this.y) == distanceY) ? true: false;
     }
     
     public Boolean isInRange(Location next, int min, int max){
