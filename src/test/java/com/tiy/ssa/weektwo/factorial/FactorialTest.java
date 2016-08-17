@@ -1,8 +1,10 @@
-package com.tiy.weektwoo.factorial;
+package com.tiy.ssa.weektwo.factorial;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import com.tiy.ssa.weektwo.factorial.Factorial;
 
 public class FactorialTest {
 

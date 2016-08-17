@@ -8,6 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.tiy.ssa.week3.MapProject.DecoratorSSAMap;
+
 public class TestSSAMap {
 
     DecoratorSSAMap<Integer, String> testDecMap = new DecoratorSSAMap<>();

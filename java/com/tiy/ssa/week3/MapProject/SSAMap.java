@@ -1,4 +1,4 @@
-package com.tiy.ssa.week3;
+package com.tiy.ssa.week3.MapProject;
 
 import java.util.ArrayList;
 import java.util.Collection;

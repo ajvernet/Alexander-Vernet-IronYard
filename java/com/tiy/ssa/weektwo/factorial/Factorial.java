@@ -1,4 +1,4 @@
-package com.tiy.weektwoo.factorial;
+package com.tiy.ssa.weektwo.factorial;
 
 import java.math.BigInteger;
 import java.util.HashMap;

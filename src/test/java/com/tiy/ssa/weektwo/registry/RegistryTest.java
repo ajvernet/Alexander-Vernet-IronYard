@@ -1,4 +1,4 @@
-package com.tiy.weektwo.registry;
+package com.tiy.ssa.weektwo.registry;
 
 import static org.junit.Assert.*;
 
@@ -17,6 +17,9 @@ import org.junit.Test;
 
 import com.tiy.ssa.weektwo.assignmenttwo.Name;
 import com.tiy.ssa.weektwo.examplefive.SocialSecurityNumber;
+import com.tiy.ssa.weektwo.registry.Person;
+import com.tiy.ssa.weektwo.registry.Registry;
+import com.tiy.ssa.weektwo.registry.Registry.Relationship;
 
 public class RegistryTest {
     Registry registry = new Registry();
@@ -192,14 +195,62 @@ public class RegistryTest {
                 new SocialSecurityNumber("312345670")));
     }
     
+    @Test
+    public void testParentRelation(){
+        assertEquals(Relationship.PARENT, registry.related(new SocialSecurityNumber("512345671"), new SocialSecurityNumber("412345675")));
+    }
+    
+    @Test
+    public void testChildRelation(){
+        assertEquals(Relationship.CHILD, registry.related(new SocialSecurityNumber("412345675"), new SocialSecurityNumber("512345671")));
+    }
+    
+    @Test
+    public void testGrandParentRelation(){
+        assertEquals(Relationship.GRANDPARENT, registry.related(new SocialSecurityNumber("512345671"), new SocialSecurityNumber("212345674")));
+    }
+    
+    @Test
+    public void testGrandChildRelation(){
+        assertEquals(Relationship.GRANDCHILD, registry.related(new SocialSecurityNumber("212345674"), new SocialSecurityNumber("512345671")));
+    }
+    
+    @Test
+    public void testSiblingRelation(){
+        assertEquals(Relationship.SIBLING, registry.related(new SocialSecurityNumber("412345673"), new SocialSecurityNumber("412345674")));
+    }
+    
+    @Test
+    public void testCousinRelation(){
+        assertEquals(Relationship.COUSIN, registry.related(new SocialSecurityNumber("412345673"), new SocialSecurityNumber("312345671")));
+    }
+    
+    @Test
+    public void testAuncleRelation(){
+        assertEquals(Relationship.AUNCLE, registry.related(new SocialSecurityNumber("412345673"), new SocialSecurityNumber("212345671")));
+    }
+    
+    @Test
+    public void testNiblingRelation(){
+        assertEquals(Relationship.NIBLING, registry.related(new SocialSecurityNumber("212345671"), new SocialSecurityNumber("412345673")));
+    }
+    
+    @Test
+    public void testNoneRelation(){
+        assertEquals(Relationship.NONE, registry.related(new SocialSecurityNumber("212345671"), new SocialSecurityNumber("112345674")));
+    }
+    
     static <T> boolean membership(Collection<? extends T> one, Collection<? extends T> other)
     {
         return new HashSet<>(one).equals(new HashSet<>(other));
     }
     
+   
     static void verify(Collection<? extends SocialSecurityNumber> expected, Collection<? extends Person> actual)
     {
         Collection<SocialSecurityNumber> actualSSNs = actual.stream().map(p -> p.getSsn()).collect(Collectors.toList());
         assertTrue(String.format("expected -> %s was ->%s", expected, actualSSNs), membership(expected, actualSSNs));
     }
+    
+
   }

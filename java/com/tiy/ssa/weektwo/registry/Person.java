@@ -1,4 +1,4 @@
-package com.tiy.weektwo.registry;
+package com.tiy.ssa.weektwo.registry;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

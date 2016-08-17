@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class chessTest {
+public class ChessTest {
 
     ChessPiece piece1;
     ChessPiece piece2; 

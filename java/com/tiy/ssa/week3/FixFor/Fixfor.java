@@ -1,4 +1,4 @@
-package com.tiy.ssa.week3;
+package com.tiy.ssa.week3.FixFor;
 
 import java.util.Iterator;
 

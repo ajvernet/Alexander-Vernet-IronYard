@@ -1,4 +1,4 @@
-package com.tiy.weektwo.registry;
+package com.tiy.ssa.weektwo.registry;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -182,6 +182,9 @@ public class Registry {
     }
     
     boolean sharesParents(Person person1, Person person2){
+        
+        if(person1.getParents().isEmpty() || person2.getParents().isEmpty()) return false;
+        
         return(person1.getParents().equals(person2.getParents()));
     }
     
