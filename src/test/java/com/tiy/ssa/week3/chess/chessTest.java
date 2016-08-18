@@ -100,4 +100,9 @@ public class ChessTest {
     public void testEquals(){
         assertEquals(piece1, piece2);
     }
+    
+    @Test
+    public void testMoveToSameLocation(){
+        assertFalse(piece1.canMove(piece1.where()));
+    }
 }

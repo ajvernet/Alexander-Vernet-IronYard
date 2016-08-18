@@ -21,7 +21,7 @@ public class ChessPiece implements Piece{
 
     @Override
     public boolean canMove(Location where) {
-        if (location.isInRange(where, 0, 7)){
+        if (location.isInRange(where, 0, 7) && (!where.equals(location))){
         
         switch(name){
         case QUEEN:
