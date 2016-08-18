@@ -10,8 +10,6 @@ public class ChessPiece implements Piece{
     public ChessPiece(PieceName name, Location location){
         this.name = name;
         this.location = location;
-        
-   
     }
 
     @Override
