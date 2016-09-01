@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class FooGooTest {
     Foo foo1;
-    Foo foo2;
+ https://github.com/jbrown762/Joseph-Brown-IronYard/blob/09395f2910eb8bac64e4b67772241e649fe8cac8/src/main/java/com/tiy/ssa/week3/assignment4/Trie/Text9Trie.java   Foo foo2;
     
     Goo goo1;
     Goo goo2;
