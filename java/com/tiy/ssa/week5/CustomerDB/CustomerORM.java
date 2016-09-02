@@ -14,6 +14,12 @@ public interface CustomerORM extends ORM<Customer>{
         return "customers";
     }
     
+
+    default Customer eagerMap(ResultSet results) throws SQLException
+    {
+        return null;
+    }
+    
     default Customer map(ResultSet results) throws SQLException
     {
         Customer cust = new Customer();
@@ -26,6 +32,8 @@ public interface CustomerORM extends ORM<Customer>{
         return cust;
         
     }
+    
+
     
     default String prepareInsert()
     {
@@ -42,6 +50,10 @@ public interface CustomerORM extends ORM<Customer>{
         return "DELETE FROM customers WHERE id = ?";
     }
     
+    default String prepareEagerRead()
+    {
+        return null;
+    }
     default String prepareRead()
     {
         return "SELECT * FROM " + table() + " WHERE id = ?";

@@ -39,14 +39,80 @@ public class AccountsTest {
 
     }
     
-    @Test
-    public void insert()
+//    @Test
+    public void insertAndLoaded()
+    {
+        Customer testCust1 = new Customer("Alexander", "Vernet");     
+        testCust1 = custDao.insert(testCust1);
+        
+        Account testAcct1 = new Account(testCust1, "CH", new BigDecimal("100.00"));
+   
+        custDao.read(testCust1.getId());
+        testAcct1 = accDao.insert(testAcct1);
+
+        assertTrue(Objects.nonNull(custDao.read(testCust1.getId())));
+        assertTrue(testCust1.isLoaded());
+        
+        assertTrue(Objects.nonNull(accDao.read(testAcct1.getId())));
+        assertTrue(testAcct1.isLoaded());
+ 
+    }
+    
+//    @Test
+    public void update()
     {
         Customer testCust1 = new Customer("Alexander", "Vernet");
-        testCust1 = testCust1.setId(custDao.insert(testCust1).getId());
+        testCust1 = custDao.insert(testCust1);
+        
+        Account testAcct1 = new Account(testCust1, "CH", new BigDecimal("100.00"));
         custDao.read(testCust1.getId());
-        accDao.insert(new Account(testCust1, "CH", new BigDecimal("100.00")));
-        assertTrue(Objects.nonNull(custDao.read(testCust1.getId())));
+        
+        testAcct1 = accDao.insert(testAcct1);
+
+        
+        Customer testUpdatedCust = new Customer(testCust1.getId(), "AlexUpdated", "VernetUpdated");
+     
+        custDao.update(testUpdatedCust);
+        
+        System.out.println(testUpdatedCust);
+        System.out.println(custDao.read(testCust1.getId()));
+        assertTrue(custDao.read(testCust1.getId()).deeplyEquals(testUpdatedCust));
+       
+    }
+    
+    @Test
+    public void eagerReadTest()
+    {
+        Customer testCust1 = new Customer("Alexander", "Vernet");     
+        testCust1 = custDao.insert(testCust1);
+        
+        Account testAcct1 = new Account(testCust1, "CH", new BigDecimal("100.00"));
+   
+        custDao.read(testCust1.getId());
+        testAcct1 = accDao.insert(testAcct1);
+        
+        System.out.println(accDao.eagerRead());
+      
+    }
+    
+//    @Test
+    public void userReadTest()
+    {
+        Customer testCust1 = new Customer("Alexander", "Vernet");     
+        testCust1 = custDao.insert(testCust1);
+
+        
+        Account testAcct1 = new Account(testCust1, "CH", new BigDecimal("100.00"));
+        Account testAcct2 = new Account(testCust1, "SA", new BigDecimal("100.00"));
+        Account testAcct3 = new Account(testCust1, "CH", new BigDecimal("200.00"));
+   
+      
+        testAcct1 = accDao.insert(testAcct1);
+        testAcct2 = accDao.insert(testAcct2);
+        testAcct3 = accDao.insert(testAcct3);
+        
+        System.out.println(accDao.eagerRead());
+    //    System.out.println(accDao.readUser(testCust1.getId()));
     }
 
 }

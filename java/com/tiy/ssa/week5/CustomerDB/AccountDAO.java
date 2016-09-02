@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 
@@ -28,66 +29,136 @@ public class AccountDAO extends AbstractDAO<Account>
     public Account insert(Account domain)
     {
         
+        Connection connection = null;
+        PreparedStatement insertStatement = null;
+        ResultSet keys = null;
         try {
-        Connection connection = this.datasource.getConnection();
-        PreparedStatement insertStatement = connection.prepareStatement(this.orm.prepareInsert(), Statement.RETURN_GENERATED_KEYS);
+        connection = this.datasource.getConnection();
+        insertStatement = connection.prepareStatement(this.orm.prepareInsert(), Statement.RETURN_GENERATED_KEYS);
         
         insertStatement.setInt(1,  domain.getCustomerID());
         insertStatement.setString(2,  domain.getAccountTypeString());
         insertStatement.setBigDecimal(3,  domain.getBalance());
         
         if(insertStatement.executeUpdate() > 0){
-        ResultSet keys = insertStatement.getGeneratedKeys();
-        keys.next();
+            keys = insertStatement.getGeneratedKeys();
         
+            if(keys.next())
+                
+                return domain.setId(keys.getInt(1)).setLoaded();    
 
-        domain = domain.setId(keys.getInt(1));
-        
-        closeAll(keys, insertStatement, connection);
         }
         
-        closeAll(insertStatement, connection);
+
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
+        } finally { closeAll(insertStatement, connection);}
         
-        return new Account(domain.getId(), domain.getCustomer(), domain.getAccountTypeString(), domain.getBalance());
+        return null;//new Account(domain.getId(), domain.getCustomer(), domain.getAccountTypeString(), domain.getBalance());
     }
 
-//    @Override
-//    public Account update(Account domain)
-//    {
-//        Connection connection = this.datasource.getConnection();
-//        PreparedStatement updateStatement = connection.prepareStatement(this.orm.prepareUpdate(), )
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
+    
     /**
      *
      * @param user
      * @return all the accounts for given user
      */
 
+  
+    public List<Account> eagerRead(){
+    
+    List<Account> accList = new ArrayList<>();
+    {
+        CustomerORM custORM = new CustomerORM(){};
+        Connection connection = null;
+        PreparedStatement read = null;
+        ResultSet query = null;
+            try
+            {
+
+                connection = this.datasource.getConnection();
+
+                read = connection.prepareStatement(this.orm.prepareEagerRead() + this.orm.table() + 
+                        ".customer" + " = " + custORM.table() + ".id");
+
+                query = read.executeQuery();
+                while (query.next()){
+
+                    accList.add(this.orm.eagerMap(query));
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+        }
+    }
+    
     public List<Account> readUser(int user)
     {
-        try {
-            Connection connection = this.datasource.getConnection();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        throw new UnsupportedOperationException("not implemented yet");
+        List<Account> accountList = new ArrayList<>();
+        CustomerORM custORM = new CustomerORM(){};
+        Connection connection = null;
+        PreparedStatement read = null;
+        ResultSet query = null;
+            try
+            {
+
+                connection = this.datasource.getConnection();
+
+                read = connection.prepareStatement(this.orm.prepareEagerRead() + this.orm.table() + 
+                        ".customer" + " = " + custORM.table() + ".id WHERE id = ?");
+                read.setInt(1, user);
+                query = read.executeQuery();
+                while (query.next()){
+
+                    accountList.add(this.orm.eagerMap(query));
+                }
+                
+                return accountList;
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
     }
 
     /**
      *
      * @return those accounts that have a negative balance - never null
      */
-    public List<Account> readUnderwater()
-    {
-        throw new UnsupportedOperationException("not implemented yet");
-    }
+//    public List<Account> readUnderwater()
+//    {
+//        Connection connection = null;
+//        PreparedStatement read = null;
+//        ResultSet query = null;
+//            try
+//            {
+//
+//                connection = this.datasource.getConnection();
+//
+//                read = connection.prepareStatement("SELECT * FROM accounts WHERE balance = ?");
+//                read.setBigDecimal(1, x);
+//
+//                query = read.executeQuery();
+//                if (query.next())
+//
+//                    return this.orm.eagerMap(query);
+//
+//            }
+//            catch (Exception ex)
+//            {
+//
+//            }
+//            return null;
+//        
+//    
+//    
+//    }
 
     @Override
     public Account update(Account domain) {

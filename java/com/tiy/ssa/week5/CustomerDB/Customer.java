@@ -5,24 +5,30 @@ public class Customer implements DomainObject{
     final String firstName;
     final String lastName;
     final int id;
+    final boolean loaded;
     
     public Customer(){
         
-      this(0, "", "");
+      this(0, "", "", false);
     }
     
     public Customer(int id){
-        this(id, "", "");
+        this(id, "", "", false);
     }
     
     public Customer(String firstName, String lastName) {
-        this(0, firstName, lastName);      
+        this(0, firstName, lastName, false);      
     }
     
     public Customer(int id, String firstName, String lastName){
+        this(id, firstName, lastName, false);
+    }
+    
+    public Customer(int id, String firstName, String lastName, Boolean loaded){
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
+        this.loaded = loaded;
     }
     
 
@@ -30,16 +36,21 @@ public class Customer implements DomainObject{
         return id;
     }
 
+    public Customer setLoaded()
+    {
+        return new Customer(this.id, this.firstName, this.lastName, true);
+    }
+    
     public Customer setFirstName(String firstName) {
-        return new Customer(this.id, firstName, this.lastName);
+        return new Customer(this.id, firstName, this.lastName, this.loaded);
     }
 
     public Customer setLastName(String lastName) {
-        return new Customer(this.id, this.firstName, lastName);
+        return new Customer(this.id, this.firstName, lastName, this.loaded);
     }
 
     public Customer setId(int id) {
-        return new Customer(id, this.firstName, this.lastName);
+        return new Customer(id, this.firstName, this.lastName, this.loaded);
     }
 
     public String getFirstName() {
@@ -75,7 +86,27 @@ public class Customer implements DomainObject{
 
     @Override
     public String toString() {
-        return "Customer [firstName=" + firstName + ", lastName=" + lastName + ", id=" + id + "]";
+        return "Customer [firstName=" + firstName + ", lastName=" + lastName + ", id=" + id + ", loaded=" + loaded
+                + "]";
+    }
+
+    @Override
+    public boolean deeplyEquals(Object obj) {
+        if(this.equals(obj)){
+            if(!this.firstName.equals(((Customer)obj).firstName))
+                return false;
+            if(this.lastName.equals(((Customer)obj).lastName))
+                return false;
+            
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isLoaded() {
+        // TODO Auto-generated method stub
+        return loaded;
     }
 
  

@@ -12,6 +12,7 @@ public class Account implements DomainObject{
     final Customer customer;
     final type accountType;
     final BigDecimal balance;
+    final boolean loaded;
     
     public Account(){
         
@@ -19,21 +20,28 @@ public class Account implements DomainObject{
         this.customer = new Customer();
         this.accountType = Account.type.CH;
         this.balance = new BigDecimal(0.0);
+        this.loaded = false;
         
     }
     
     public Account(Customer customer, String accountType, BigDecimal balance)
     {
-        this(0, customer, accountType, balance);
+        this(0, customer, accountType, balance, false);
+    }
+    
+    public Account(Customer customer, String accountType, BigDecimal balance, boolean loaded)
+    {
+        this(0, customer, accountType, balance, loaded);
         
     }
     
-    public Account(int id, Customer customer, String accountType, BigDecimal balance) {
+    public Account(int id, Customer customer, String accountType, BigDecimal balance, boolean loaded) {
         super();
         this.id = id;
         this.customer = customer;
         this.accountType = Account.type.valueOf(accountType);
         this.balance = balance;
+        this.loaded = loaded;
     }
 
     public int getId() {
@@ -41,14 +49,19 @@ public class Account implements DomainObject{
     }
 
     public Account setId(int id) {
-        return new Account(id, this.customer, this.accountType.toString(), this.balance);
+        return new Account(id, this.customer, this.accountType.toString(), this.balance, this.loaded);
     }
     
     public Account setCustomer(Customer customer)
     {
-        return new Account(this.id, customer, this.accountType.toString(), this.balance);
+        return new Account(this.id, customer, this.accountType.toString(), this.balance, this.loaded);
     }
 
+    public Account setLoaded()
+    {
+        return new Account(this.id, this.customer, this.accountType.toString(), this.balance, true);
+    }
+    
     public int getCustomerID() {
         return customer.getId();
     }
@@ -78,12 +91,12 @@ public class Account implements DomainObject{
         
         switch(type){
         case "CH": 
-            return new Account(this.id, this.customer, "CH", this.balance);
+            return new Account(this.id, this.customer, "CH", this.balance, this.loaded);
                     
         case "SV":
-        return new Account(this.id, this.customer, "SV", this.balance);
+        return new Account(this.id, this.customer, "SV", this.balance, this.loaded);
         
-        default: return new Account(this.id, this.customer, this.accountType.toString(), this.balance);
+        default: return new Account(this.id, this.customer, this.accountType.toString(), this.balance, this.loaded);
         }
               
     }
@@ -93,7 +106,7 @@ public class Account implements DomainObject{
     }
 
     public Account setBalance(BigDecimal balance) {
-        return new Account(this.id, this.customer, this.accountType.toString(), balance);
+        return new Account(this.id, this.customer, this.accountType.toString(), balance, this.loaded);
     }
     
     @Override
@@ -104,6 +117,22 @@ public class Account implements DomainObject{
         return result;
     }
 
+    @Override
+    public boolean deeplyEquals(Object obj){
+        if(this.equals(obj)){
+            if(!this.customer.deeplyEquals(((Account)obj).customer))
+                return false;
+            if(!this.accountType.equals(((Account)obj).accountType))
+                return false;
+            if(this.balance != ((Account)obj).balance)
+                return false;
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -120,8 +149,14 @@ public class Account implements DomainObject{
 
     @Override
     public String toString() {
-        return "Account [id=" + id + ", customerID=" + getCustomerID() + ", accountType=" + accountType + ", balance="
-                + balance + "]";
+        return "Account [id=" + id + ", customer=" + customer + ", accountType=" + accountType + ", balance=" + balance
+                + ", loaded=" + loaded + "]";
+    }
+
+    @Override
+    public boolean isLoaded() {       
+        return loaded;
+
     }
     
 

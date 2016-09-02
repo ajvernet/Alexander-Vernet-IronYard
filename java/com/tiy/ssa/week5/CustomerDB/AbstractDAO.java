@@ -12,7 +12,7 @@ public abstract class AbstractDAO<T extends DomainObject> implements AutoCloseab
 {
     final DataSource datasource;
     final ORM<T> orm;
-
+    
     protected AbstractDAO(DataSource datasource, ORM<T> orm)
     {
         this.datasource = datasource;

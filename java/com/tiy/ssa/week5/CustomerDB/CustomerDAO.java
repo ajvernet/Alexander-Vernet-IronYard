@@ -38,9 +38,9 @@ public class CustomerDAO extends AbstractDAO<Customer>{
             keys = insertStatement.getGeneratedKeys();
             keys.next();
    
-            customer = customer.setId(keys.getInt(1));
+            return customer.setId(keys.getInt(1)).setLoaded();
 
-            return new Customer(customer.getId(), customer.getFirstName(), customer.getLastName());
+       
 
             
 
@@ -62,12 +62,14 @@ public class CustomerDAO extends AbstractDAO<Customer>{
         try {
            connection = this.datasource.getConnection();
            updateStatement = connection.prepareStatement(this.orm.prepareUpdate(), Statement.RETURN_GENERATED_KEYS);
-           updateStatement.setString(2, customer.getFirstName());
-           updateStatement.setString(3,  customer.getLastName());
+           updateStatement.setString(1, customer.getFirstName());
+           updateStatement.setString(2,  customer.getLastName());
+           updateStatement.setInt(3,  customer.getId());
            if(updateStatement.executeUpdate() > 0)
            keys = updateStatement.getGeneratedKeys();
-           
-           customer = this.orm.map(keys);
+           if(keys.next())
+           return customer = this.orm.map(keys);
+     
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
