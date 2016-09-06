@@ -3,6 +3,8 @@ package com.tiy.ssa.week5.CustomerDB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.tiy.ssa.model.Customer;
+
 public interface CustomerORM extends ORM<Customer>{
     default String projection()
     {

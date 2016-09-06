@@ -1,4 +1,4 @@
-package com.tiy.ssa.week5.CustomerDB;
+package com.tiy.ssa.model;
 
 public interface DomainObject {
 

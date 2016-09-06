@@ -1,9 +1,6 @@
-package com.tiy.ssa.week5.model;
+package com.tiy.ssa.model;
 
 import java.math.BigDecimal;
-
-import com.tiy.ssa.week5.CustomerDB.Customer;
-import com.tiy.ssa.week5.CustomerDB.DomainObject;
 
 public class Account implements DomainObject{
     enum type { CH, SA};  
@@ -93,8 +90,8 @@ public class Account implements DomainObject{
         case "CH": 
             return new Account(this.id, this.customer, "CH", this.balance, this.loaded);
                     
-        case "SV":
-        return new Account(this.id, this.customer, "SV", this.balance, this.loaded);
+        case "SA":
+        return new Account(this.id, this.customer, "SA", this.balance, this.loaded);
         
         default: return new Account(this.id, this.customer, this.accountType.toString(), this.balance, this.loaded);
         }

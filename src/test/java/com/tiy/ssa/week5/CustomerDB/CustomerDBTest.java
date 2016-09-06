@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import com.tiy.ssa.model.Customer;
 
 
 

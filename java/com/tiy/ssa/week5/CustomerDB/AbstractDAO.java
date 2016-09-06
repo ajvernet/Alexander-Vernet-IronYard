@@ -8,6 +8,8 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
+import com.tiy.ssa.model.DomainObject;
+
 public abstract class AbstractDAO<T extends DomainObject> implements AutoCloseable
 {
     final DataSource datasource;

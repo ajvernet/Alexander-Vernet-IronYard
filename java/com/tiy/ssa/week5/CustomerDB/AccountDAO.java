@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 
-import com.tiy.ssa.week5.model.Account;
+import com.tiy.ssa.model.Account;
 
 
 /**
@@ -42,7 +42,6 @@ public class AccountDAO extends AbstractDAO<Account>
         
         if(insertStatement.executeUpdate() > 0){
             keys = insertStatement.getGeneratedKeys();
-        
             if(keys.next())
                 
                 return domain.setId(keys.getInt(1)).setLoaded();    
@@ -84,9 +83,11 @@ public class AccountDAO extends AbstractDAO<Account>
 
                 query = read.executeQuery();
                 while (query.next()){
-
+                    System.out.println(this.orm.eagerMap(query));
                     accList.add(this.orm.eagerMap(query));
                 }
+                
+                return accList;
             }
             catch (Exception ex)
             {
@@ -168,13 +169,16 @@ public class AccountDAO extends AbstractDAO<Account>
             ResultSet keys = null;
             try {
                connection = this.datasource.getConnection();
-               updateStatement = connection.prepareStatement(this.orm.prepareUpdate(), Statement.RETURN_GENERATED_KEYS);
+               updateStatement = connection.prepareStatement(this.orm.prepareUpdate());
                updateStatement.setString(1, domain.getAccountTypeString());
                updateStatement.setBigDecimal(2, domain.getBalance());
-               if(updateStatement.executeUpdate() > 0)
-               keys = updateStatement.getGeneratedKeys();
+               updateStatement.setInt(3, domain.getId());
                
-               domain = this.orm.map(keys);
+               updateStatement.executeUpdate();
+   
+                   return domain.setLoaded();
+               
+               
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

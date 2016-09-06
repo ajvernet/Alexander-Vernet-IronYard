@@ -8,13 +8,14 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import com.mysql.cj.api.jdbc.Statement;
+import com.tiy.ssa.model.Customer;
 
 public class CustomerDAO extends AbstractDAO<Customer>{
 
 
    // String DBName;
     
-    protected CustomerDAO(DataSource datasource, CustomerORM orm) {
+    public CustomerDAO(DataSource datasource, CustomerORM orm) {
         super(datasource, orm);
         // TODO Auto-generated constructor stub
     }
@@ -39,10 +40,7 @@ public class CustomerDAO extends AbstractDAO<Customer>{
             keys.next();
    
             return customer.setId(keys.getInt(1)).setLoaded();
-
-       
-
-            
+      
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -65,6 +63,7 @@ public class CustomerDAO extends AbstractDAO<Customer>{
            updateStatement.setString(1, customer.getFirstName());
            updateStatement.setString(2,  customer.getLastName());
            updateStatement.setInt(3,  customer.getId());
+           
            if(updateStatement.executeUpdate() > 0)
            keys = updateStatement.getGeneratedKeys();
            if(keys.next())

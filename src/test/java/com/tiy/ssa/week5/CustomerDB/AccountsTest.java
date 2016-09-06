@@ -7,7 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import com.tiy.ssa.week5.model.Account;
+import com.tiy.ssa.model.Account;
+import com.tiy.ssa.model.Customer;
 
 import static org.junit.Assert.*;
 
@@ -58,7 +59,7 @@ public class AccountsTest {
  
     }
     
-//    @Test
+    @Test
     public void update()
     {
         Customer testCust1 = new Customer("Alexander", "Vernet");
@@ -77,10 +78,13 @@ public class AccountsTest {
         System.out.println(testUpdatedCust);
         System.out.println(custDao.read(testCust1.getId()));
         assertTrue(custDao.read(testCust1.getId()).deeplyEquals(testUpdatedCust));
+        
+        System.out.println(accDao.update(testAcct1.setBalance(new BigDecimal("500"))));
+        System.out.println(accDao.read(testAcct1.getId()));
        
     }
     
-    @Test
+//    @Test
     public void eagerReadTest()
     {
         Customer testCust1 = new Customer("Alexander", "Vernet");     
@@ -112,6 +116,7 @@ public class AccountsTest {
         testAcct3 = accDao.insert(testAcct3);
         
         System.out.println(accDao.eagerRead());
+      //  System.out.println(accDao.readUser(user));
     //    System.out.println(accDao.readUser(testCust1.getId()));
     }
 

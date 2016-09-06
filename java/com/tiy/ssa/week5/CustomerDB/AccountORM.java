@@ -4,7 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.tiy.ssa.week5.model.Account;
+import com.tiy.ssa.model.Account;
+import com.tiy.ssa.model.Customer;
 
 public interface AccountORM extends ORM<Account>{
     
@@ -13,6 +14,11 @@ public interface AccountORM extends ORM<Account>{
     {
         return "id, customer, type, balance";
     }
+    
+//    default String eagerProjection()
+//    {
+//
+//    }
 
     default String table()
     {
@@ -41,7 +47,6 @@ public interface AccountORM extends ORM<Account>{
 
         Account acct = new Account();
         
-   
         acct = acct.setId(results.getInt(1));
 
         acct = acct.setCustomer(new Customer(results.getInt(2)));

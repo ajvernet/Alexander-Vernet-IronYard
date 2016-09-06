@@ -1,4 +1,4 @@
-package com.tiy.ssa.week5.CustomerDB;
+package com.tiy.ssa.model;
 
 public class Customer implements DomainObject{
 
@@ -95,7 +95,9 @@ public class Customer implements DomainObject{
         if(this.equals(obj)){
             if(!this.firstName.equals(((Customer)obj).firstName))
                 return false;
-            if(this.lastName.equals(((Customer)obj).lastName))
+            if(!this.lastName.equals(((Customer)obj).lastName))
+                return false;
+            if(!this.isLoaded() == ((Customer)obj).isLoaded())
                 return false;
             
             return true;

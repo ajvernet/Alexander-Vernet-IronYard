@@ -3,7 +3,8 @@ package com.tiy.ssa.week5.CustomerDB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.tiy.ssa.week5.model.Account;
+import com.tiy.ssa.model.Account;
+import com.tiy.ssa.model.Customer;
 
 public interface EagerAccountORM extends AccountORM{
     @Override
